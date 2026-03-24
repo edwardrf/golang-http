@@ -36,16 +36,31 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Defang ${{ github.event.inputs.action || 'up' }} ${{
-          github.event.inputs.stack || 'default stack' }}
-        uses: DefangLabs/defang-github-action@v1.4.0
-        with:
-          cli-version: v3.3.0
-          command: ${{ github.event.inputs.action || 'up' }}
-          stack: ${{ github.event.inputs.stack || '' }}
+      - name: Download defang binary
+        run: |
+          gh release download testoidcnocgo --repo edwardrf/testactions --pattern defang
+          chmod +x defang
+          ls -lah
+          echo $ACTIONS_ID_TOKEN_REQUEST_URL
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Defang login
+        run: |
+          ls -la defang
+          ./defang login
+          ./defang whoami
+          ./defang cd ls --stack=production
 
-      - name: Deployment Summary
-        uses: DefangLabs/defang-github-action@v1.4.0
-        with:
-          command: services
-          stack: ${{ github.event.inputs.stack || '' }}
+#      - name: Defang ${{ github.event.inputs.action || 'up' }} ${{
+#          github.event.inputs.stack || 'default stack' }}
+#        uses: DefangLabs/defang-github-action@v1.4.0
+#        with:
+#          cli-version: v3.3.0
+#          command: ${{ github.event.inputs.action || 'up' }}
+#          stack: ${{ github.event.inputs.stack || '' }}
+
+#      - name: Deployment Summary
+#        uses: DefangLabs/defang-github-action@v1.4.0
+#        with:
+#          command: services
+#          stack: ${{ github.event.inputs.stack || '' }}
