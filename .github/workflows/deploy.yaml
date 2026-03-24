@@ -49,7 +49,7 @@ jobs:
           ls -la defang
           ./defang login
           ./defang whoami
-          ./defang cd ls --stack=production
+          ./defang cd ls --stack=production --debug
 
 #      - name: Defang ${{ github.event.inputs.action || 'up' }} ${{
 #          github.event.inputs.stack || 'default stack' }}
