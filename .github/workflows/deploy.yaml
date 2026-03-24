@@ -40,7 +40,7 @@ jobs:
           github.event.inputs.stack || 'default stack' }}
         uses: DefangLabs/defang-github-action@v1.4.0
         with:
-          cli-version: v3.2.0
+          cli-version: v3.3.0
           command: ${{ github.event.inputs.action || 'up' }}
           stack: ${{ github.event.inputs.stack || '' }}
 
