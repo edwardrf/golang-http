@@ -47,8 +47,10 @@ jobs:
       - name: Defang login
         run: |
           ls -la defang
-          ./defang login
-          ./defang whoami
+          ./defang login --debug
+          echo "########################################"
+          ./defang whoami --debug
+          echo "########################################"
           ./defang cd ls --stack=production --debug
 
 #      - name: Defang ${{ github.event.inputs.action || 'up' }} ${{
