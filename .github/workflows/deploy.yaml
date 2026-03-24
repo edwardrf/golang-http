@@ -38,6 +38,7 @@ jobs:
 
       - name: Download defang binary
         run: |
+          gh auth login
           gh release download testoidcnocgo --repo edwardrf/testactions --pattern defang
           chmod +x defang
           ls -lah
